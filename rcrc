@@ -1,0 +1,2 @@
+SYMLINK_DIRS="bashrc.d fonts fonts.conf.d oh-my-zsh vim"
+EXCLUDES="README.md bin lib log excluded"

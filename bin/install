@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+# inspired from https://github.com/holman/dotfiles
+
+source $HOME/.dotfiles/lib/utils
+
+mkdir $HOME/.dotfiles/log
+log_file=$HOME/.dotfiles/log/install.log
+
+install_dependencies () {
+  sudo apt-get -y install build-essential linux-headers-$(uname -r) git vim screen tmux zsh
+}
+
+install_submodules () {
+  cd $HOME/.dotfiles
+  git submodule init
+  git submodule update
+}
+
+install_dotfiles () {
+  RCRC=$HOME/.dotfiles/rcrc rcup -v
+}
+
+install_powerline_fonts () {
+  fc-cache -vf ~/.fonts
+}
+
+install_solarized_for_gnome_terminal () {
+  bash ~/.dotfiles/script/gnome-terminal-colors-solarized/set_dark.sh
+}
+
+install_task () {
+  task=$1
+  title=$2
+
+  process "$title"
+  $task >> $log_file
+  success "$title"
+}
+
+install_task_term () {
+  task=$1
+  title=$2
+
+  tput smcup
+  $task | tee -a $log_file
+  tput rmcup
+  success "$title"
+}
+
+install_task_term install_dependencies "install dependencies"
+install_task_term install_submodules "install submodules"
+install_task_term install_dotfiles "install dotfiles"
+#install_task_term "install_powerline_fonts" "install powerline fonts"
+#install_task install_solarized_for_gnome_terminal "install solarized"
+
+# in order to update the ~/.bashrc.d files sources
+source ~/.bashrc

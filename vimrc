@@ -21,17 +21,6 @@ Plug 'https://github.com/genoma/vim-less.git'
 
 call plug#end()
 
-" Solarized
-
-" to properly display colorschemes
-set t_Co=16
-"set term=screen-256color-bce
-"let g:solarized_termcolors=256
-
-syntax enable
-set background=dark
-colorscheme solarized
-
 " Buffers
 nnoremap gb :bn<CR>
 nnoremap gB :bp<CR>
@@ -104,3 +93,15 @@ nmap <silent> <C-n> :call g:WorkaroundNERDTreeToggle()<CR>
 function! g:WorkaroundNERDTreeToggle()
   try | NERDTreeToggle | catch | silent! NERDTree | endtry
 endfunction
+
+" Solarized
+
+" to properly display colorschemes
+"set t_Co=16
+"set term=screen-256color-bce
+" work with gnome terminal
+let g:solarized_termcolors=256
+
+syntax enable
+set background=dark
+colorscheme solarized
