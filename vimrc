@@ -105,3 +105,13 @@ let g:solarized_termcolors=256
 syntax enable
 set background=dark
 colorscheme solarized
+
+""
+" Autocompletion
+"
+
+" To prevent autocompletion first entry to insert.
+" I'd rather enter character by character until the list is short enough.
+" This is especially the case when using omni-completion (ie. code keyword
+" suggestions.
+set completeopt+=noinsert
